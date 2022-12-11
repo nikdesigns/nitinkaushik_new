@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import morgan from 'morgan';
 import authRoutes from './routes/authRoutes.js';
 
 const app = express();
@@ -15,6 +16,10 @@ mongoose
   })
   .then(() => console.log('DB Connected'))
   .catch((err) => console.log(err));
+
+//middleware
+app.use(morgan('dev'));
+app.use(express.json());
 
 //route middlewares
 app.use('/api', authRoutes);
